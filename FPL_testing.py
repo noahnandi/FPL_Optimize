@@ -16,7 +16,7 @@ import nest_asyncio
 from understat import Understat
 from fuzzywuzzy import fuzz,process
 import matplotlib
-
+import matplotlib.pyplot as plt
 
 nest_asyncio.apply()
 
@@ -123,3 +123,10 @@ merge_data = tst.drop(index = [185,116,277,104,220,321,228])
 initial_merge = fpl_data.merge(merge_data, left_on = 'name', right_on = 'fpl_name', how = 'inner')
 initial_merge = initial_merge.drop(columns = ['assists_y','fpl_name','ratio_score','team_title','goals','time'])
 initial_merge = initial_merge.reset_index(drop = True)
+for i in range(27,38):
+    initial_merge.iloc[:,i] = initial_merge.iloc[:,i].astype(float)
+    
+fig, ax = plt.subplots(figsize=(20,20))         # Sample figsize in inches
+sns.heatmap(initial_merge.corr(), annot=True, linewidths=.5, ax=ax)
+
+
