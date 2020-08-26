@@ -121,3 +121,5 @@ for i in range(0,len(fpl_data)):
 ratio_check = tst[['fpl_name','player_name','ratio_score']]
 merge_data = tst.drop(index = [185,116,277,104,220,321,228])
 initial_merge = fpl_data.merge(merge_data, left_on = 'name', right_on = 'fpl_name', how = 'inner')
+initial_merge = initial_merge.drop(columns = ['assists_y','fpl_name','ratio_score','team_title','goals','time'])
+initial_merge = initial_merge.reset_index(drop = True)
